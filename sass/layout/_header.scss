@@ -1,0 +1,26 @@
+header {
+	width: 100%;
+	height: 100px;
+	padding: 0 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header {
+	&__logo {
+		height: 18px;
+	}
+
+	&__menu {
+		list-style: none;
+
+		&-button {
+			background-color: transparent;
+			border: none;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}
