@@ -6,24 +6,30 @@
 		<!-- displays site properly based on user's device -->
 
 		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-		<link rel="stylesheet" href="./prefixed/style.css" />
+		<!-- Utiliser la page préfixée à la fin -->
+		<!-- <link rel="stylesheet" href="./prefixed/style.css" /> -->
+
+		<!-- Supprimer cet import à la fin -->
+		<link rel="stylesheet" href="./css/style.css" />
 		<title>Frontend Mentor | Manage landing page</title>
 	</head>
 	<body>
 		<header>
-			<img src="./images/logo.svg" alt="Logo" />
-			<ul>
+			<img class="header__logo" src="./images/logo.svg" alt="Logo" />
+			<ul class="header__menu">
 				<li>Pricing</li>
 				<li>Product</li>
 				<li>About Us</li>
 				<li>Careers</li>
 				<li>Community</li>
 			</ul>
-			<button><img src="./images/icon-hamburger.svg" alt="Menu" /></button>
+			<button class="header__menu-button">
+				<img src="./images/icon-hamburger.svg" alt="Menu" />
+			</button>
 		</header>
 		<main>
 			<section class="intro">
-				<img src="./images/illustration-intro.svg" alt="Charts" />
+				<img class="chart" src="./images/illustration-intro.svg" alt="Charts" />
 				<div>
 					<h1>Bring everyone together to build better products</h1>
 					<p>
