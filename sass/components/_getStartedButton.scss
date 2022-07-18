@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../utils/variables';
 
 .getStartedButton {
@@ -10,4 +11,11 @@
 	font-size: 0.8em;
 	font-weight: 700;
 	color: variables.$tertiary-color;
+
+	&--reversed {
+		color: variables.$primary-color;
+		background-color: white;
+		box-shadow: 0 0.7em 1.3em -0.6em color.adjust(variables.$primary-color, $lightness: -10%, $saturation:
+					-30%);
+	}
 }
