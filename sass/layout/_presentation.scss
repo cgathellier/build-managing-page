@@ -9,9 +9,7 @@
 		padding: 0 2em;
 
 		& h2 {
-			font-size: 1.8em;
-			color: variables.$secondary-color;
-			text-align: center;
+			@include mixins.sectionTitle;
 		}
 
 		& p {

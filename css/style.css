@@ -115,6 +115,68 @@ header {
   padding-right: 1em;
 }
 
+.testimonials {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.testimonials h2 {
+  font-size: 1.8em;
+  color: hsl(228deg, 39%, 23%);
+  text-align: center;
+  margin-bottom: 70px;
+}
+.testimonials__slide {
+  width: 100vw;
+  height: 250px;
+  padding: 0 1em;
+}
+.testimonials__slide-content {
+  padding: 3em 0 1.5em 0;
+  background-color: hsl(0deg, 0%, 98%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.testimonials__slide img {
+  width: 4.4em;
+  margin-bottom: 12px;
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+}
+.testimonials__slide h3 {
+  margin-bottom: 8px;
+  color: hsl(228deg, 39%, 23%);
+  font-size: 1em;
+}
+.testimonials__slide p {
+  font-size: 0.85em;
+  color: hsl(227deg, 12%, 61%);
+  line-height: 1.9em;
+  text-align: center;
+  padding: 0 2em;
+}
+.testimonials__navigation {
+  width: 100vw;
+  margin: 24px 0 50px 0;
+  display: flex;
+  justify-content: center;
+}
+.testimonials__navigation-dot {
+  width: 0.5em;
+  height: 0.5em;
+  margin: 0 2px;
+  background-color: transparent;
+  border: solid 0.1em hsl(12deg, 88%, 59%);
+  border-radius: 50%;
+}
+.testimonials__navigation-dot--selected {
+  background-color: hsl(12deg, 88%, 59%);
+}
+
 .getStartedButton {
   width: 11em;
   height: 3.4em;

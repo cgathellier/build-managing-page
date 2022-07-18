@@ -5,3 +5,9 @@
 	color: variables.$text-color;
 	line-height: 1.9em;
 }
+
+@mixin sectionTitle {
+	font-size: 1.8em;
+	color: variables.$secondary-color;
+	text-align: center;
+}
