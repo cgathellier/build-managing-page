@@ -1,0 +1,7 @@
+@use './variables';
+
+@mixin text {
+	font-size: 0.85em;
+	color: variables.$text-color;
+	line-height: 1.9em;
+}
