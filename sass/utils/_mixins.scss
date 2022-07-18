@@ -11,3 +11,11 @@
 	color: variables.$secondary-color;
 	text-align: center;
 }
+
+@mixin roundedEl {
+	height: 3.4em;
+	padding: 0 2.5em;
+	border: none;
+	border-radius: 1.7em;
+	font-size: 0.8em;
+}
