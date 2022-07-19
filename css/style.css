@@ -255,7 +255,8 @@ footer {
 }
 
 .copyright {
-  font-size: 0.8em;
+  font-size: 0.75em;
+  color: hsl(227deg, 12%, 61%);
 }
 
 .button {
