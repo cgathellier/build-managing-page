@@ -14,9 +14,15 @@ footer {
 	width: 100%;
 	margin-bottom: 40px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
+
+	& div {
+		position: relative;
+	}
+
 	&__input {
 		@include mixins.roundedEl;
+		margin-right: 0.7em;
 		color: variables.$primary-color;
 	}
 
@@ -26,6 +32,7 @@ footer {
 		color: variables.$primary-color;
 		font-style: italic;
 		font-size: 0.8em;
+		position: absolute;
 	}
 }
 

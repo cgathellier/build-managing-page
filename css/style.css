@@ -203,7 +203,10 @@ footer {
   width: 100%;
   margin-bottom: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+.newsletter div {
+  position: relative;
 }
 .newsletter__input {
   height: 3.4em;
@@ -211,6 +214,7 @@ footer {
   border: none;
   border-radius: 1.7em;
   font-size: 0.8em;
+  margin-right: 0.7em;
   color: hsl(12deg, 88%, 59%);
 }
 .newsletter__error {
@@ -219,6 +223,7 @@ footer {
   color: hsl(12deg, 88%, 59%);
   font-style: italic;
   font-size: 0.8em;
+  position: absolute;
 }
 
 .footer-menu {
