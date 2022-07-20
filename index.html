@@ -14,18 +14,20 @@
 		<title>Frontend Mentor | Manage landing page</title>
 	</head>
 	<body>
-		<header>
+		<header class="header">
 			<img class="header__logo" src="./images/logo.svg" alt="Logo" />
-			<ul class="header__menu">
+			<ul class="header__menu header__menu--hidden">
 				<li>Pricing</li>
 				<li>Product</li>
 				<li>About Us</li>
 				<li>Careers</li>
 				<li>Community</li>
 			</ul>
+			<div class="header__menu-backdrop header__menu-backdrop--hidden"></div>
 			<button class="header__menu-button">
 				<img src="./images/icon-hamburger.svg" alt="Menu" />
 			</button>
+			<button class="button button--shadowed header__start-button">Get Started</button>
 		</header>
 		<main>
 			<section class="intro">

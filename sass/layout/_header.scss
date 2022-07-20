@@ -1,19 +1,63 @@
-header {
+@use '../utils/variables';
+
+.header {
 	width: 100%;
 	height: 100px;
 	padding: 0 20px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
 
-.header {
 	&__logo {
 		height: 18px;
 	}
 
 	&__menu {
+		width: 320px;
+		height: 300px;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		position: fixed;
+		top: 100px;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: white;
+		border-radius: 5px;
 		list-style: none;
+		z-index: 3;
+		color: variables.$secondary-color;
+		font-weight: 700;
+		transition: transform ease-in-out 200ms;
+
+		&--hidden {
+			transform: translateX(200%);
+		}
+
+		&-backdrop {
+			width: 100vw;
+			height: 100vh;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+			z-index: 2;
+			opacity: 1;
+			transition: opacity ease-in-out 200ms;
+
+			&--hidden {
+				opacity: 0;
+
+				// faire une keyframe plutôt
+				// pour gérer en même temps
+				// display: none
+				// et opacity
+			}
+		}
 
 		&-button {
 			background-color: transparent;
@@ -21,6 +65,61 @@ header {
 			&:hover {
 				cursor: pointer;
 			}
+		}
+	}
+
+	&__start-button {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.header {
+		padding: 0 50px;
+
+		&__menu {
+			width: 450px;
+			height: 500px;
+		}
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.header {
+		padding: 0 100px;
+
+		&__start-button {
+			display: inline-block;
+		}
+
+		&__menu {
+			width: 500px;
+			height: 100%;
+			position: relative;
+			flex-direction: row;
+			transform: none;
+			top: 0;
+			left: 0;
+			z-index: 1;
+			font-size: 0.8em;
+
+			&-backdrop {
+				display: none;
+			}
+
+			&-button {
+				display: none;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.header {
+		padding: 0 200px;
+
+		&__menu {
+			width: 550px;
 		}
 	}
 }
