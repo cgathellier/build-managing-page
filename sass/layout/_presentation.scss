@@ -6,6 +6,7 @@
 	// padding: 0 1em;
 
 	&__header {
+		margin-bottom: 50px;
 		padding: 0 2em;
 
 		& h2 {
@@ -19,12 +20,12 @@
 	}
 
 	&__container {
-		margin-top: 50px;
 		padding-left: 1em;
 	}
 
 	&__article {
 		margin-bottom: 50px;
+
 		& h3 {
 			height: 2.4em;
 			display: flex;
@@ -52,5 +53,45 @@
 			@include mixins.text;
 			padding-right: 1em;
 		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.presentation {
+		padding: 0 100px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.presentation {
+		padding: variables.$laptop-section-padding;
+		display: flex;
+		flex-direction: row;
+
+		&__header {
+			padding: 0 50px 0 0;
+
+			& h2 {
+				text-align: start;
+			}
+
+			& p {
+				text-align: start;
+			}
+		}
+
+		&__container {
+			padding-left: 50px;
+		}
+
+		&__article h3 {
+			background-color: white;
+		}
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.presentation {
+		padding: variables.$desktop-section-padding;
 	}
 }

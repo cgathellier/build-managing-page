@@ -84,6 +84,7 @@ body {
 }
 @media screen and (min-width: 1024px) {
   .header {
+    margin-bottom: 50px;
     padding: 0 100px;
   }
   .header__start-button {
@@ -186,6 +187,7 @@ body {
   margin-top: 100px;
 }
 .presentation__header {
+  margin-bottom: 50px;
   padding: 0 2em;
 }
 .presentation__header h2 {
@@ -200,7 +202,6 @@ body {
   text-align: center;
 }
 .presentation__container {
-  margin-top: 50px;
   padding-left: 1em;
 }
 .presentation__article {
@@ -234,6 +235,38 @@ body {
   padding-right: 1em;
 }
 
+@media screen and (min-width: 768px) {
+  .presentation {
+    padding: 0 100px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .presentation {
+    padding: 0 100px;
+    display: flex;
+    flex-direction: row;
+  }
+  .presentation__header {
+    padding: 0 50px 0 0;
+  }
+  .presentation__header h2 {
+    text-align: start;
+  }
+  .presentation__header p {
+    text-align: start;
+  }
+  .presentation__container {
+    padding-left: 50px;
+  }
+  .presentation__article h3 {
+    background-color: white;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .presentation {
+    padding: 0 200px;
+  }
+}
 .testimonials {
   margin-bottom: 40px;
   display: flex;

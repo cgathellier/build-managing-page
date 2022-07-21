@@ -37,7 +37,7 @@
 
 @media screen and (min-width: 1024px) {
 	.intro {
-		padding: 0 100px;
+		padding: variables.$laptop-section-padding;
 		flex-direction: row-reverse;
 		justify-content: space-between;
 
@@ -67,7 +67,7 @@
 
 @media screen and (min-width: 1440px) {
 	.intro {
-		padding: 0 200px;
+		padding: variables.$desktop-section-padding;
 
 		& h1 {
 			font-size: 3.5em;
