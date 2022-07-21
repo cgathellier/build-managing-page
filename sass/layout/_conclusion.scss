@@ -14,3 +14,23 @@
 		text-align: center;
 	}
 }
+
+@media screen and (min-width: 1024px) {
+	.conclusion {
+		padding: 40px 100px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		& h2 {
+			max-width: 450px;
+			text-align: start;
+		}
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.conclusion {
+		padding: 40px 200px;
+	}
+}
