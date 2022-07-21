@@ -5,9 +5,16 @@
 	"main": "index.js",
 	"scripts": {
 		"sass": "sass --watch ./sass/main.scss:./css/style.css --style expanded",
-		"prefix": "postcss ./css/style.css --use autoprefixer -d ./prefixed/"
+		"prefix": "postcss ./css/style.css --use autoprefixer -d ./prefixed/",
+		"start": "lite-server"
 	},
 	"author": "",
 	"license": "ISC",
-	"browserslist": "last 4 versions"
+	"browserslist": "last 4 versions",
+	"devDependencies": {
+		"typescript": "^4.7.4"
+	},
+	"dependencies": {
+		"lite-server": "^2.6.1"
+	}
 }
