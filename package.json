@@ -4,8 +4,8 @@
 	"description": "![Design preview for the Manage landing page coding challenge](./design/desktop-preview.jpg)",
 	"main": "index.js",
 	"scripts": {
-		"sass": "sass --watch ./sass/main.scss:./css/style.css --style expanded",
-		"prefix": "postcss ./css/style.css --use autoprefixer -d ./prefixed/",
+		"sass": "sass --watch ./src/sass/main.scss:./src/css/style.css --style expanded",
+		"prefix": "postcss ./src/css/style.css --use autoprefixer -d ./dist/prefixed/",
 		"start": "lite-server"
 	},
 	"author": "",
