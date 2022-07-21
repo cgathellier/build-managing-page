@@ -1,4 +1,5 @@
 @use '../utils/variables';
+@use '../utils/mixins';
 
 .intro {
 	padding: 0 1em;
@@ -8,7 +9,6 @@
 
 	&__chart {
 		max-width: 400px;
-		// max-width: 100%;
 	}
 
 	& div {
@@ -37,7 +37,7 @@
 
 @media screen and (min-width: 1024px) {
 	.intro {
-		padding: variables.$laptop-section-padding;
+		@include mixins.laptopSectionPadding;
 		flex-direction: row-reverse;
 		justify-content: space-between;
 
@@ -67,7 +67,7 @@
 
 @media screen and (min-width: 1440px) {
 	.intro {
-		padding: variables.$desktop-section-padding;
+		@include mixins.desktopSectionPadding;
 
 		& h1 {
 			font-size: 3.5em;

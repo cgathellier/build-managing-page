@@ -3,7 +3,6 @@
 
 .presentation {
 	margin-top: 100px;
-	// padding: 0 1em;
 
 	&__header {
 		margin-bottom: 50px;
@@ -64,11 +63,12 @@
 
 @media screen and (min-width: 1024px) {
 	.presentation {
-		padding: variables.$laptop-section-padding;
+		@include mixins.laptopSectionPadding;
 		display: flex;
 		flex-direction: row;
 
 		&__header {
+			width: 50%;
 			padding: 0 50px 0 0;
 
 			& h2 {
@@ -81,6 +81,8 @@
 		}
 
 		&__container {
+			width: 50%;
+
 			padding-left: 50px;
 		}
 
@@ -92,6 +94,6 @@
 
 @media screen and (min-width: 1440px) {
 	.presentation {
-		padding: variables.$desktop-section-padding;
+		@include mixins.desktopSectionPadding;
 	}
 }

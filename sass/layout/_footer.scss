@@ -1,77 +1,150 @@
 @use '../utils/variables';
 @use '../utils/mixins';
 
-footer {
+.footer {
 	padding: 50px 24px 20px;
 	background-color: variables.$footer-color;
 	color: white;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	&__newsletter {
+		width: 100%;
+		margin-bottom: 40px;
+		display: flex;
+
+		& div {
+			position: relative;
+		}
+
+		&-input {
+			@include mixins.roundedEl;
+			margin-right: 0.7em;
+			color: variables.$primary-color;
+		}
+
+		&-error {
+			margin-top: 0.5em;
+			padding-left: 1.25em;
+			color: variables.$primary-color;
+			font-style: italic;
+			font-size: 0.8em;
+			position: absolute;
+		}
+	}
+
+	&__menu {
+		width: 100%;
+		height: 160px;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		& li {
+			width: 50%;
+			padding: 0.6em 0 0.6em 3em;
+			list-style: none;
+			font-size: 0.9em;
+		}
+	}
+
+	&__socials {
+		width: 100%;
+		margin-bottom: 50px;
+		padding: 0 1em;
+		display: flex;
+		justify-content: space-between;
+
+		& img {
+			width: 2em;
+		}
+	}
+
+	&__logo {
+		margin-bottom: 40px;
+	}
+
+	&__copyright {
+		font-size: 0.75em;
+		color: variables.$text-color;
+	}
 }
 
-.newsletter {
-	width: 100%;
-	margin-bottom: 40px;
-	display: flex;
-
-	& div {
-		position: relative;
-	}
-
-	&__input {
-		@include mixins.roundedEl;
-		margin-right: 0.7em;
-		color: variables.$primary-color;
-	}
-
-	&__error {
-		margin-top: 0.5em;
-		padding-left: 1.25em;
-		color: variables.$primary-color;
-		font-style: italic;
-		font-size: 0.8em;
-		position: absolute;
+@media screen and (min-width: 768px) {
+	.footer {
+		padding-left: 50px;
+		padding-right: 50px;
 	}
 }
 
-.footer-menu {
-	width: 100%;
-	height: 160px;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	& li {
-		width: 50%;
-		padding: 0.6em 0 0.6em 3em;
-		list-style: none;
-		font-size: 0.9em;
-	}
-}
+@media screen and (min-width: 1024px) {
+	.footer {
+		@include mixins.laptopSectionPadding;
+		height: 260px;
+		padding-bottom: 50px;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: flex-start;
 
-.socials {
-	width: 100%;
-	margin-bottom: 50px;
-	padding: 0 1em;
-	display: flex;
-	justify-content: space-between;
+		&__newsletter {
+			order: 4;
+			width: 40%;
+			margin: 8px 0 0 0;
+			justify-content: flex-end;
+		}
 
-	& img {
-		width: 2em;
+		&__menu {
+			order: 3;
+			width: 40%;
+			margin: 0;
+			padding: 0 50px;
+			& li {
+				height: 25%;
+				font-size: 1em;
+			}
+		}
 
-		&:hover {
-			filter: invert(52%) sepia(30%) saturate(4852%) hue-rotate(336deg) brightness(96%)
-				contrast(98%);
+		&__socials {
+			order: 2;
+			width: 20%;
+			height: 1.5em;
+			margin: 0;
+			padding: 0 0 8px 0;
+			align-items: flex-end;
+
+			& img {
+				width: 1.5em;
+				&:hover {
+					filter: invert(52%) sepia(30%) saturate(4852%) hue-rotate(336deg)
+						brightness(96%) contrast(98%);
+				}
+			}
+		}
+
+		&__logo {
+			order: 1;
+			margin-top: 10px;
+		}
+
+		&__copyright {
+			order: 5;
+			width: 40%;
+			margin-bottom: 8px;
+			display: flex;
+			justify-content: flex-end;
+			align-items: flex-end;
+			font-size: 1em;
 		}
 	}
 }
 
-.footer-logo {
-	margin-bottom: 40px;
-}
+@media screen and (min-width: 1440px) {
+	.footer {
+		@include mixins.desktopSectionPadding;
 
-.copyright {
-	font-size: 0.75em;
-	color: variables.$text-color;
+		&__menu {
+			padding-right: 0;
+		}
+	}
 }

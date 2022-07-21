@@ -19,3 +19,13 @@
 	border-radius: 1.7em;
 	font-size: 0.8em;
 }
+
+@mixin laptopSectionPadding {
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+@mixin desktopSectionPadding {
+	padding-left: 200px;
+	padding-right: 200px;
+}
