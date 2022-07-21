@@ -17,7 +17,9 @@
 
 @media screen and (min-width: 1024px) {
 	.conclusion {
-		padding: 40px 100px;
+		padding: variables.$laptop-section-padding;
+		padding-top: 40px;
+		padding-bottom: 40px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -31,6 +33,8 @@
 
 @media screen and (min-width: 1440px) {
 	.conclusion {
-		padding: 40px 200px;
+		padding: variables.$desktop-section-padding;
+		padding-top: 40px;
+		padding-bottom: 40px;
 	}
 }
