@@ -62,6 +62,9 @@ body {
 .header__menu-backdrop--hidden {
   opacity: 0;
 }
+.header__menu li {
+  color: hsl(228deg, 39%, 23%);
+}
 .header__menu-button {
   background-color: transparent;
   border: none;
@@ -104,6 +107,13 @@ body {
   }
   .header__menu-backdrop {
     display: none;
+  }
+  .header__menu li {
+    transition: color ease-in-out 200ms;
+  }
+  .header__menu li:hover {
+    cursor: pointer;
+    color: hsl(227deg, 12%, 61%);
   }
   .header__menu-button {
     display: none;
@@ -467,6 +477,11 @@ body {
   .footer__menu li {
     height: 25%;
     font-size: 1em;
+    transition: color ease-in-out 200ms;
+  }
+  .footer__menu li:hover {
+    color: hsl(12deg, 88%, 59%);
+    cursor: pointer;
   }
   .footer__socials {
     order: 2;
@@ -522,6 +537,24 @@ body {
   color: hsl(12deg, 88%, 59%);
   background-color: white;
   box-shadow: 0 0.7em 1.3em -0.6em #c55134;
+}
+
+@media screen and (min-width: 1024px) {
+  .button {
+    transition: background-color ease-in-out 200ms;
+  }
+  .button:hover {
+    background-color: #f68f75;
+    cursor: pointer;
+  }
+  .button--reversed {
+    transition: color ease-in-out 200ms;
+  }
+  .button--reversed:hover {
+    color: #f9af9d;
+    background-color: white;
+    cursor: pointer;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

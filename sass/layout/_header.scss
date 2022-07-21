@@ -60,6 +60,10 @@
 			}
 		}
 
+		& li {
+			color: variables.$secondary-color;
+		}
+
 		&-button {
 			background-color: transparent;
 			border: none;
@@ -107,6 +111,15 @@
 
 			&-backdrop {
 				display: none;
+			}
+
+			& li {
+				transition: color ease-in-out 200ms;
+
+				&:hover {
+					cursor: pointer;
+					color: variables.$text-color;
+				}
 			}
 
 			&-button {

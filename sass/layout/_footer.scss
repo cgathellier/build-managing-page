@@ -102,6 +102,12 @@
 			& li {
 				height: 25%;
 				font-size: 1em;
+				transition: color ease-in-out 200ms;
+
+				&:hover {
+					color: variables.$primary-color;
+					cursor: pointer;
+				}
 			}
 		}
 

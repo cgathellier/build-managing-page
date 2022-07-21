@@ -19,3 +19,24 @@
 					-30%);
 	}
 }
+
+@media screen and (min-width: 1024px) {
+	.button {
+		transition: background-color ease-in-out 200ms;
+
+		&:hover {
+			background-color: color.scale(variables.$primary-color, $lightness: 30%);
+			cursor: pointer;
+		}
+
+		&--reversed {
+			transition: color ease-in-out 200ms;
+
+			&:hover {
+				color: color.scale(variables.$primary-color, $lightness: 50%);
+				background-color: white;
+				cursor: pointer;
+			}
+		}
+	}
+}
