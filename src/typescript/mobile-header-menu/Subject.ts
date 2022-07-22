@@ -2,7 +2,6 @@ import { Action, Observer } from './types';
 
 export default class AnimateMenuSubject {
 	private _observers: Observer[] = [];
-	// constructor() {}
 
 	subscribe(obs: Observer) {
 		this._observers.push(obs);

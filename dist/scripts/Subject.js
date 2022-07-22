@@ -2,7 +2,6 @@ export default class AnimateMenuSubject {
     constructor() {
         this._observers = [];
     }
-    // constructor() {}
     subscribe(obs) {
         this._observers.push(obs);
     }

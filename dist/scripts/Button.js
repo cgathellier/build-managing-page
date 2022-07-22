@@ -3,9 +3,7 @@ import MenuObserver from './Menu.js';
 import BackdropObserver from './Backdrop.js';
 class Button {
     constructor() {
-        var _a;
         this.$button = document.querySelector('.header__menu-button');
-        this.$icon = (_a = this.$button) === null || _a === void 0 ? void 0 : _a.querySelector('img');
         this.AnimationSubject = new Subject();
         this.MenuObs = new MenuObserver();
         this.BackdropObs = new BackdropObserver();
@@ -15,11 +13,22 @@ class Button {
     }
     isMenuOpen() {
         var _a;
-        if (((_a = this.$icon) === null || _a === void 0 ? void 0 : _a.getAttribute('alt')) === 'Close menu') {
+        const icon = (_a = this.$button) === null || _a === void 0 ? void 0 : _a.querySelector('img');
+        if ((icon === null || icon === void 0 ? void 0 : icon.getAttribute('alt')) === 'Close menu') {
             return true;
         }
         else {
             return false;
+        }
+    }
+    updateIcon() {
+        if (this.$button) {
+            if (this.isMenuOpen()) {
+                this.$button.innerHTML = `<img src="./images/icon-hamburger.svg" alt="Open menu" />`;
+            }
+            else {
+                this.$button.innerHTML = `<img src="./images/icon-close.svg" alt="Close menu" />`;
+            }
         }
     }
     listen() {
@@ -27,9 +36,11 @@ class Button {
         (_a = this.$button) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
             if (this.isMenuOpen()) {
                 this.AnimationSubject.fire('CLOSE');
+                this.updateIcon();
             }
             else {
                 this.AnimationSubject.fire('OPEN');
+                this.updateIcon();
             }
         });
     }
