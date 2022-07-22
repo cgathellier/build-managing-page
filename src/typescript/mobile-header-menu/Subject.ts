@@ -7,10 +7,6 @@ export default class AnimateMenuSubject {
 		this._observers.push(obs);
 	}
 
-	unsubscribe(obs: Observer) {
-		this._observers.filter(observer => observer !== obs);
-	}
-
 	fire(action: Action) {
 		this._observers.forEach(obs => {
 			obs.toggle(action);

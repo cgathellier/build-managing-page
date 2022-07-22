@@ -9,8 +9,13 @@ class Button {
 	private BackdropObs = new BackdropObserver();
 
 	constructor() {
-		this.AnimationSubject.subscribe(this.MenuObs);
-		this.AnimationSubject.subscribe(this.BackdropObs);
+		if (this.$button) {
+			var buttonStyle = window.getComputedStyle(this.$button);
+			if (buttonStyle.display !== 'none') {
+				this.AnimationSubject.subscribe(this.MenuObs);
+				this.AnimationSubject.subscribe(this.BackdropObs);
+			}
+		}
 
 		this.listen();
 	}

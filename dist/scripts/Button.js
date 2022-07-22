@@ -7,8 +7,13 @@ class Button {
         this.AnimationSubject = new Subject();
         this.MenuObs = new MenuObserver();
         this.BackdropObs = new BackdropObserver();
-        this.AnimationSubject.subscribe(this.MenuObs);
-        this.AnimationSubject.subscribe(this.BackdropObs);
+        if (this.$button) {
+            var buttonStyle = window.getComputedStyle(this.$button);
+            if (buttonStyle.display !== 'none') {
+                this.AnimationSubject.subscribe(this.MenuObs);
+                this.AnimationSubject.subscribe(this.BackdropObs);
+            }
+        }
         this.listen();
     }
     isMenuOpen() {
