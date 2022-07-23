@@ -7,13 +7,8 @@ class Button {
         this.AnimationSubject = new Subject();
         this.MenuObs = new MenuObserver();
         this.BackdropObs = new BackdropObserver();
-        if (this.$button) {
-            var buttonStyle = window.getComputedStyle(this.$button);
-            if (buttonStyle.display !== 'none') {
-                this.AnimationSubject.subscribe(this.MenuObs);
-                this.AnimationSubject.subscribe(this.BackdropObs);
-            }
-        }
+        this.AnimationSubject.subscribe(this.MenuObs);
+        this.AnimationSubject.subscribe(this.BackdropObs);
         this.listen();
     }
     isMenuOpen() {
@@ -36,18 +31,22 @@ class Button {
             }
         }
     }
+    updateInterface() {
+        if (this.isMenuOpen()) {
+            this.AnimationSubject.fire('CLOSE');
+            this.updateIcon();
+        }
+        else {
+            this.AnimationSubject.fire('OPEN');
+            this.updateIcon();
+        }
+    }
     listen() {
-        var _a;
-        (_a = this.$button) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
-            if (this.isMenuOpen()) {
-                this.AnimationSubject.fire('CLOSE');
-                this.updateIcon();
-            }
-            else {
-                this.AnimationSubject.fire('OPEN');
-                this.updateIcon();
-            }
-        });
+        var _a, _b;
+        // click on button
+        (_a = this.$button) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => this.updateInterface());
+        // click on backdrop
+        (_b = this.BackdropObs.$backdrop) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => this.updateInterface());
     }
 }
 const button = new Button();

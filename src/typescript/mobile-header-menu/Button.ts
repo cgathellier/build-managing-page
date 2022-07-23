@@ -9,13 +9,8 @@ class Button {
 	private BackdropObs = new BackdropObserver();
 
 	constructor() {
-		if (this.$button) {
-			var buttonStyle = window.getComputedStyle(this.$button);
-			if (buttonStyle.display !== 'none') {
-				this.AnimationSubject.subscribe(this.MenuObs);
-				this.AnimationSubject.subscribe(this.BackdropObs);
-			}
-		}
+		this.AnimationSubject.subscribe(this.MenuObs);
+		this.AnimationSubject.subscribe(this.BackdropObs);
 
 		this.listen();
 	}
@@ -40,16 +35,22 @@ class Button {
 		}
 	}
 
+	updateInterface() {
+		if (this.isMenuOpen()) {
+			this.AnimationSubject.fire('CLOSE');
+			this.updateIcon();
+		} else {
+			this.AnimationSubject.fire('OPEN');
+			this.updateIcon();
+		}
+	}
+
 	listen() {
-		this.$button?.addEventListener('click', () => {
-			if (this.isMenuOpen()) {
-				this.AnimationSubject.fire('CLOSE');
-				this.updateIcon();
-			} else {
-				this.AnimationSubject.fire('OPEN');
-				this.updateIcon();
-			}
-		});
+		// click on button
+		this.$button?.addEventListener('click', () => this.updateInterface());
+
+		// click on backdrop
+		this.BackdropObs.$backdrop?.addEventListener('click', () => this.updateInterface());
 	}
 }
 
