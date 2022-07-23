@@ -13,6 +13,15 @@
 	}
 }
 
+@keyframes menuLinkUnderline {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
 .header {
 	width: 100%;
 	height: 100px;
@@ -128,6 +137,27 @@
 				&:hover {
 					cursor: pointer;
 					color: variables.$text-color;
+
+					& > .header__menu-link::before {
+						width: 100%;
+						animation: 300ms ease-in-out menuLinkUnderline;
+					}
+				}
+			}
+
+			&-link {
+				position: relative;
+
+				&::before {
+					content: '';
+					width: 0;
+					height: 2px;
+					position: absolute;
+					bottom: -3px;
+					right: 0;
+					left: 0;
+					background-color: variables.$secondary-color;
+					transition: all ease-in-out 300ms;
 				}
 			}
 

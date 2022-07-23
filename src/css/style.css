@@ -16,6 +16,14 @@ body {
   overflow-y: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:visited {
+  color: inherit;
+}
+
 @keyframes showBackdrop {
   0% {
     opacity: 0;
@@ -25,6 +33,14 @@ body {
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes menuLinkUnderline {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
   }
 }
 .header {
@@ -131,6 +147,24 @@ body {
   .header__menu li:hover {
     cursor: pointer;
     color: hsl(227deg, 12%, 61%);
+  }
+  .header__menu li:hover > .header__menu-link::before {
+    width: 100%;
+    animation: 300ms ease-in-out menuLinkUnderline;
+  }
+  .header__menu-link {
+    position: relative;
+  }
+  .header__menu-link::before {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    left: 0;
+    background-color: hsl(228deg, 39%, 23%);
+    transition: all ease-in-out 300ms;
   }
   .header__menu-button {
     display: none;
