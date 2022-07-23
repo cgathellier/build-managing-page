@@ -4,6 +4,7 @@ import BackdropObserver from './Backdrop.js';
 class Button {
     constructor() {
         this.$button = document.querySelector('.header__menu-button');
+        this.$body = document.querySelector('body');
         this.AnimationSubject = new Subject();
         this.MenuObs = new MenuObserver();
         this.BackdropObs = new BackdropObserver();
@@ -21,24 +22,18 @@ class Button {
             return false;
         }
     }
-    updateIcon() {
-        if (this.$button) {
-            if (this.isMenuOpen()) {
-                this.$button.innerHTML = `<img src="./images/icon-hamburger.svg" alt="Open menu" />`;
-            }
-            else {
-                this.$button.innerHTML = `<img src="./images/icon-close.svg" alt="Close menu" />`;
-            }
-        }
-    }
     updateInterface() {
+        if (!this.$button)
+            return;
         if (this.isMenuOpen()) {
             this.AnimationSubject.fire('CLOSE');
-            this.updateIcon();
+            this.$button.innerHTML = `<img src="./images/icon-hamburger.svg" alt="Open menu" />`;
+            this.$body.classList.remove('body-no-scroll');
         }
         else {
             this.AnimationSubject.fire('OPEN');
-            this.updateIcon();
+            this.$button.innerHTML = `<img src="./images/icon-close.svg" alt="Close menu" />`;
+            this.$body.classList.add('body-no-scroll');
         }
     }
     listen() {
