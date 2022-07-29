@@ -1,11 +1,27 @@
 @use '../utils/variables';
 @use '../utils/mixins';
 
+$slidesPositions: 1, 2, 3, 4;
+
+@function sliderTranslation($position) {
+	@return 150 * $position;
+}
+
+@mixin slides {
+	@each $slidePosition in $slidesPositions {
+		&--show-#{$slidePosition} {
+			transform: translateX(sliderTranslation($slidePosition) * 1vw);
+		}
+	}
+}
+
 .testimonials {
-	margin-bottom: 40px;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	overflow-x: hidden;
 
 	& h2 {
 		@include mixins.sectionTitle;
@@ -13,7 +29,11 @@
 	}
 
 	&__slider {
-		// à faire avec le JS
+		width: 400vw;
+		display: flex;
+		transition: transform ease-in-out 300ms;
+
+		@include slides;
 	}
 
 	&__slide {
