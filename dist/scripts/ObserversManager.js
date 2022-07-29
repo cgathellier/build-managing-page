@@ -1,4 +1,4 @@
-export default class AnimateMenuSubject {
+export default class ObserversManager {
     constructor() {
         this._observers = [];
     }

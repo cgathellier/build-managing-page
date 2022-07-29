@@ -1,4 +1,4 @@
-import { Action, Observer } from './types';
+import { Action, Observer } from './Button';
 
 export default class Menu implements Observer {
 	private $menu = document.querySelector('.header__menu');

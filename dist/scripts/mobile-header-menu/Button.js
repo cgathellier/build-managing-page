@@ -1,15 +1,15 @@
-import Subject from './Subject.js';
+import ObserversManager from '../ObserversManager.js';
 import MenuObserver from './Menu.js';
 import BackdropObserver from './Backdrop.js';
 class Button {
     constructor() {
         this.$button = document.querySelector('.header__menu-button');
         this.$body = document.querySelector('body');
-        this.AnimationSubject = new Subject();
+        this.AnimationManager = new ObserversManager();
         this.MenuObs = new MenuObserver();
         this.BackdropObs = new BackdropObserver();
-        this.AnimationSubject.subscribe(this.MenuObs);
-        this.AnimationSubject.subscribe(this.BackdropObs);
+        this.AnimationManager.subscribe(this.MenuObs);
+        this.AnimationManager.subscribe(this.BackdropObs);
         this.listen();
     }
     isMenuOpen() {
@@ -26,12 +26,12 @@ class Button {
         if (!this.$button)
             return;
         if (this.isMenuOpen()) {
-            this.AnimationSubject.fire('CLOSE');
+            this.AnimationManager.fire('CLOSE');
             this.$button.innerHTML = `<img src="./images/icon-hamburger.svg" alt="Open menu" />`;
             this.$body.classList.remove('body-no-scroll');
         }
         else {
-            this.AnimationSubject.fire('OPEN');
+            this.AnimationManager.fire('OPEN');
             this.$button.innerHTML = `<img src="./images/icon-close.svg" alt="Close menu" />`;
             this.$body.classList.add('body-no-scroll');
         }
