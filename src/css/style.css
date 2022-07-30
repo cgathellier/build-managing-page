@@ -359,13 +359,13 @@ a:visited {
   transform: translateX(150vw);
 }
 .testimonials__slider--show-2 {
-  transform: translateX(300vw);
+  transform: translateX(50vw);
 }
 .testimonials__slider--show-3 {
-  transform: translateX(450vw);
+  transform: translateX(-50vw);
 }
 .testimonials__slider--show-4 {
-  transform: translateX(600vw);
+  transform: translateX(-150vw);
 }
 .testimonials__slide {
   width: 100vw;

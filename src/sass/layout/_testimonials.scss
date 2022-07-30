@@ -4,7 +4,7 @@
 $slidesPositions: 1, 2, 3, 4;
 
 @function sliderTranslation($position) {
-	@return 150 * $position;
+	@return 250 - (100 * $position);
 }
 
 @mixin slides {
