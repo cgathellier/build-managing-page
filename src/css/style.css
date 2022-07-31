@@ -355,16 +355,16 @@ a:visited {
   display: flex;
   transition: transform ease-in-out 300ms;
 }
-.testimonials__slider--show-1 {
+.testimonials__slider--show-0 {
   transform: translateX(150vw);
 }
-.testimonials__slider--show-2 {
+.testimonials__slider--show-1 {
   transform: translateX(50vw);
 }
-.testimonials__slider--show-3 {
+.testimonials__slider--show-2 {
   transform: translateX(-50vw);
 }
-.testimonials__slider--show-4 {
+.testimonials__slider--show-3 {
   transform: translateX(-150vw);
 }
 .testimonials__slide {
