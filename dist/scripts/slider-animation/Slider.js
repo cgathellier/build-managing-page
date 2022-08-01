@@ -8,6 +8,9 @@ class Slider {
         this._currentSlide = 0;
         this._prevSlide = 3;
         this._nextSlide = 1;
+        this.touchStartClientX = 0;
+        this.touchMoveClientX = 0;
+        this.sliderOffset = 0;
         this.Dots = new Dots();
         this.listen();
     }
@@ -33,9 +36,27 @@ class Slider {
         this.currentSlide(this._nextSlide);
         this.nextSlide(this._nextSlide + 1);
     }
-    listen() {
+    translateSlider() {
         var _a;
-        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => this.updateInterface());
+        const translation = (this.touchMoveClientX / this.touchStartClientX) * 100 - 100;
+        const rounded = Math.round((translation + Number.EPSILON) * 100) / 100;
+        console.log(rounded);
+        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.setAttribute('style', `transform: translateX(${rounded}%)`);
+    }
+    listen() {
+        var _a, _b, _c;
+        const _ = this;
+        function handleTouchStart(ev) {
+            _.touchStartClientX = ev.touches[0].clientX;
+        }
+        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.addEventListener('touchstart', handleTouchStart);
+        function handleTouchMove(ev) {
+            _.touchMoveClientX = ev.touches[0].clientX;
+            _.translateSlider();
+        }
+        (_b = this.$slider) === null || _b === void 0 ? void 0 : _b.addEventListener('touchmove', handleTouchMove);
+        function handleTouchEnd(ev) { }
+        (_c = this.$slider) === null || _c === void 0 ? void 0 : _c.addEventListener('touchend', handleTouchEnd);
     }
 }
 const slider = new Slider();

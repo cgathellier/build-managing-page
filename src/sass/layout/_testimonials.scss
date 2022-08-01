@@ -9,8 +9,8 @@ $slidesPositions: 0, 1, 2, 3;
 
 @mixin slides {
 	@each $slidePosition in $slidesPositions {
-		&--show-#{$slidePosition} {
-			transform: translateX(sliderTranslation($slidePosition) * 1vw);
+		&-#{$slidePosition} {
+			left: 100% * $slidePosition;
 		}
 	}
 }
@@ -28,18 +28,36 @@ $slidesPositions: 0, 1, 2, 3;
 		margin-bottom: 70px;
 	}
 
-	&__slider {
-		width: 400vw;
-		display: flex;
-		transition: transform ease-in-out 300ms;
+	&__carousel {
+		display: block;
+		width: 100vw;
+		user-select: none;
+		position: relative;
+	}
 
-		@include slides;
+	&__viewport {
+		height: 250px;
+		touch-action: pan-y;
+		cursor: grab;
+		overflow: hidden;
+		position: relative;
+	}
+
+	&__slider {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 
 	&__slide {
+		position: absolute;
+		pointer-events: all;
+		height: auto;
+
+		@include slides;
+
 		width: 100vw;
-		height: 250px;
-		padding: 0 1em;
 
 		&-content {
 			padding: 3em 0 1.5em 0;
