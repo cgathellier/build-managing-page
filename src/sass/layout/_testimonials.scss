@@ -6,11 +6,6 @@ $slidesPositions: 0, 1, 2, 3;
 @function sliderTranslation($position) {
 	@return 150 - (100 * $position);
 }
-// $slidesPositions: 1, 2, 3, 4;
-
-// @function sliderTranslation($position) {
-// 	@return 250 - (100 * $position);
-// }
 
 @mixin slides {
 	@each $slidePosition in $slidesPositions {
