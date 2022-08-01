@@ -11,6 +11,7 @@ class Slider {
         this.touchStartClientX = 0;
         this.touchMoveClientX = 0;
         this.sliderOffset = 0;
+        this.translationOffset = 0;
         this.Dots = new Dots();
         this.listen();
     }
@@ -36,12 +37,51 @@ class Slider {
         this.currentSlide(this._nextSlide);
         this.nextSlide(this._nextSlide + 1);
     }
-    translateSlider() {
+    applyTranslation(value) {
         var _a;
+        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.setAttribute('style', `transform: translateX(${value}%)`);
+    }
+    computeTranslation() {
         const translation = (this.touchMoveClientX / this.touchStartClientX) * 100 - 100;
         const rounded = Math.round((translation + Number.EPSILON) * 100) / 100;
-        console.log(rounded);
-        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.setAttribute('style', `transform: translateX(${rounded}%)`);
+        this.translationOffset = rounded;
+        this.applyTranslation(rounded + this.sliderOffset);
+    }
+    alignSlider(value) {
+        var _a;
+        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.classList.add('testimonials__slider--smoothTransition');
+        this.applyTranslation(value);
+        setTimeout(() => {
+            var _a;
+            (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.classList.remove('testimonials__slider--smoothTransition');
+        }, 300);
+        this.sliderOffset = value;
+    }
+    handleTouchEnd() {
+        this.sliderOffset += this.translationOffset;
+        if (this.sliderOffset > 0) {
+            this.alignSlider(0);
+        }
+        else if (this.sliderOffset < -300) {
+            this.alignSlider(-300);
+        }
+        const rest = Math.abs(this.sliderOffset % 100);
+        // de gauche à droite mais translation < 30% ==> on revient à l'image actuelle
+        if (this.touchStartClientX > this.touchMoveClientX && rest <= 30) {
+            this.alignSlider(this.sliderOffset + rest);
+        }
+        // de gauche à droite mais translation > 30% ==> on passe à l'image suivante
+        else if (this.touchStartClientX > this.touchMoveClientX && rest > 30) {
+            this.alignSlider(this.sliderOffset - (100 - rest));
+        }
+        // de droite à gauche mais translation > 30% ==> on passe à l'image précédente
+        else if (this.touchStartClientX < this.touchMoveClientX && rest < 70) {
+            this.alignSlider(this.sliderOffset + rest);
+        }
+        // de droite à gauche mais translation < 30% ==> on revient à l'image actuelle
+        else if (this.touchStartClientX < this.touchMoveClientX && rest >= 70) {
+            this.alignSlider(this.sliderOffset - (100 - rest));
+        }
     }
     listen() {
         var _a, _b, _c;
@@ -52,10 +92,12 @@ class Slider {
         (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.addEventListener('touchstart', handleTouchStart);
         function handleTouchMove(ev) {
             _.touchMoveClientX = ev.touches[0].clientX;
-            _.translateSlider();
+            _.computeTranslation();
         }
         (_b = this.$slider) === null || _b === void 0 ? void 0 : _b.addEventListener('touchmove', handleTouchMove);
-        function handleTouchEnd(ev) { }
+        function handleTouchEnd(ev) {
+            _.handleTouchEnd();
+        }
         (_c = this.$slider) === null || _c === void 0 ? void 0 : _c.addEventListener('touchend', handleTouchEnd);
     }
 }
