@@ -21,18 +21,18 @@ $slidesPositions: 0, 1, 2, 3;
 
 	& h2 {
 		@include mixins.sectionTitle;
-		margin-bottom: 70px;
 	}
 
 	&__carousel {
 		display: block;
 		width: 100vw;
+		height: 350px;
 		user-select: none;
 		position: relative;
 	}
 
 	&__viewport {
-		height: 250px;
+		height: 100%;
 		touch-action: pan-y;
 		cursor: grab;
 		overflow: hidden;
@@ -43,7 +43,7 @@ $slidesPositions: 0, 1, 2, 3;
 		position: absolute;
 		left: 0;
 		width: 100%;
-		height: 100%;
+		margin-top: 70px;
 
 		&--smoothTransition {
 			transition: transform ease-in-out 300ms;
@@ -53,11 +53,11 @@ $slidesPositions: 0, 1, 2, 3;
 	&__slide {
 		position: absolute;
 		pointer-events: all;
-		height: auto;
+		width: 100vw;
+		height: 250px;
+		padding: 0 1em;
 
 		@include slides;
-
-		width: 100vw;
 
 		&-content {
 			padding: 3em 0 1.5em 0;
@@ -91,7 +91,7 @@ $slidesPositions: 0, 1, 2, 3;
 
 	&__navigation {
 		width: 100vw;
-		margin: 24px 0 50px 0;
+		margin-bottom: 50px;
 		display: flex;
 		justify-content: center;
 
