@@ -20,29 +20,22 @@ class Slider {
 		this.listen();
 	}
 
-	prevSlide(slideNum: number) {
-		this._prevSlide = slideNum;
-	}
-
-	currentSlide(slideNum: number) {
-		this._currentSlide = slideNum;
-	}
-
-	nextSlide(slideNum: number) {
-		if (slideNum > this.numberOfSlides - 1) {
-			this._nextSlide = 0;
-		} else {
-			this._nextSlide = slideNum;
+	goPrevSlide() {
+		if (this._currentSlide !== 0) {
+			this.Dots.update(this._currentSlide, this._prevSlide);
+			this._nextSlide = this._currentSlide;
+			this._currentSlide = this._prevSlide;
+			this._prevSlide = this._prevSlide - 1;
 		}
 	}
 
-	updateInterface() {
-		this.$slider?.classList.remove(`testimonials__slider--show-${this._currentSlide}`);
-		this.$slider?.classList.add(`testimonials__slider--show-${this._nextSlide}`);
-
-		this.Dots.update(this._currentSlide, this._nextSlide);
-		this.currentSlide(this._nextSlide);
-		this.nextSlide(this._nextSlide + 1);
+	goNextSlide() {
+		if (this._currentSlide !== this.numberOfSlides - 1) {
+			this.Dots.update(this._currentSlide, this._nextSlide);
+			this._prevSlide = this._currentSlide;
+			this._currentSlide = this._nextSlide;
+			this._nextSlide = this._nextSlide + 1;
+		}
 	}
 
 	applyTranslation(value: number) {
@@ -83,11 +76,13 @@ class Slider {
 		// de gauche à droite mais translation > 30% ==> on passe à l'image suivante
 		else if (this.touchStartClientX > this.touchMoveClientX && rest > 30) {
 			this.alignSlider(this.sliderOffset - (100 - rest));
+			this.goNextSlide();
 		}
 
 		// de droite à gauche mais translation > 30% ==> on passe à l'image précédente
 		else if (this.touchStartClientX < this.touchMoveClientX && rest < 70) {
 			this.alignSlider(this.sliderOffset + rest);
+			this.goPrevSlide();
 		}
 
 		// de droite à gauche mais translation < 30% ==> on revient à l'image actuelle

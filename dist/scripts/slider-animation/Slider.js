@@ -15,27 +15,21 @@ class Slider {
         this.Dots = new Dots();
         this.listen();
     }
-    prevSlide(slideNum) {
-        this._prevSlide = slideNum;
-    }
-    currentSlide(slideNum) {
-        this._currentSlide = slideNum;
-    }
-    nextSlide(slideNum) {
-        if (slideNum > this.numberOfSlides - 1) {
-            this._nextSlide = 0;
-        }
-        else {
-            this._nextSlide = slideNum;
+    goPrevSlide() {
+        if (this._currentSlide !== 0) {
+            this.Dots.update(this._currentSlide, this._prevSlide);
+            this._nextSlide = this._currentSlide;
+            this._currentSlide = this._prevSlide;
+            this._prevSlide = this._prevSlide - 1;
         }
     }
-    updateInterface() {
-        var _a, _b;
-        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.classList.remove(`testimonials__slider--show-${this._currentSlide}`);
-        (_b = this.$slider) === null || _b === void 0 ? void 0 : _b.classList.add(`testimonials__slider--show-${this._nextSlide}`);
-        this.Dots.update(this._currentSlide, this._nextSlide);
-        this.currentSlide(this._nextSlide);
-        this.nextSlide(this._nextSlide + 1);
+    goNextSlide() {
+        if (this._currentSlide !== this.numberOfSlides - 1) {
+            this.Dots.update(this._currentSlide, this._nextSlide);
+            this._prevSlide = this._currentSlide;
+            this._currentSlide = this._nextSlide;
+            this._nextSlide = this._nextSlide + 1;
+        }
     }
     applyTranslation(value) {
         var _a;
@@ -73,10 +67,12 @@ class Slider {
         // de gauche à droite mais translation > 30% ==> on passe à l'image suivante
         else if (this.touchStartClientX > this.touchMoveClientX && rest > 30) {
             this.alignSlider(this.sliderOffset - (100 - rest));
+            this.goNextSlide();
         }
         // de droite à gauche mais translation > 30% ==> on passe à l'image précédente
         else if (this.touchStartClientX < this.touchMoveClientX && rest < 70) {
             this.alignSlider(this.sliderOffset + rest);
+            this.goPrevSlide();
         }
         // de droite à gauche mais translation < 30% ==> on revient à l'image actuelle
         else if (this.touchStartClientX < this.touchMoveClientX && rest >= 70) {
