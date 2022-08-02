@@ -30,6 +30,11 @@ class Slider {
             this._nextSlide = this._nextSlide + 1;
         }
     }
+    resetState() {
+        this.translationStartClientX = 0;
+        this.translationMoveClientX = 0;
+        this.translationOffset = 0;
+    }
     applyTranslation(value) {
         var _a;
         (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.setAttribute('style', `transform: translateX(${value}%)`);
@@ -71,31 +76,33 @@ class Slider {
             this.alignSlider(limit);
         }
     }
-    handleTouchEnd() {
+    handleTranslationEnd() {
         this.saveAndCheckOffSet();
         const rest = Math.abs(this.sliderOffset % 100);
-        // de gauche à droite mais translation < 30% ==> on revient à l'image actuelle
-        if (this.translationStartClientX > this.translationMoveClientX && rest <= 30) {
+        // de gauche à droite mais translation < 10% ==> on revient à l'image actuelle
+        if (this.translationStartClientX > this.translationMoveClientX && rest <= 10) {
             this.alignSlider(this.sliderOffset + rest);
         }
-        // de gauche à droite mais translation > 30% ==> on passe à l'image suivante
-        else if (this.translationStartClientX > this.translationMoveClientX && rest > 30) {
+        // de gauche à droite mais translation > 10% ==> on passe à l'image suivante
+        else if (this.translationStartClientX > this.translationMoveClientX && rest > 10) {
             this.alignSlider(this.sliderOffset - (100 - rest));
             this.goNextSlide();
         }
-        // de droite à gauche mais translation > 30% ==> on passe à l'image précédente
-        else if (this.translationStartClientX < this.translationMoveClientX && rest < 70) {
+        // de droite à gauche mais translation > 10% ==> on passe à l'image précédente
+        else if (this.translationStartClientX < this.translationMoveClientX && rest < 90) {
             this.alignSlider(this.sliderOffset + rest);
             this.goPrevSlide();
         }
-        // de droite à gauche mais translation < 30% ==> on revient à l'image actuelle
-        else if (this.translationStartClientX < this.translationMoveClientX && rest >= 70) {
+        // de droite à gauche mais translation < 10% ==> on revient à l'image actuelle
+        else if (this.translationStartClientX < this.translationMoveClientX && rest >= 90) {
             this.alignSlider(this.sliderOffset - (100 - rest));
         }
+        this.resetState();
     }
     listen() {
         var _a, _b;
         const _ = this;
+        // TOUCH EVENTS
         function handleTouchMove(ev) {
             _.translationMoveClientX = ev.touches[0].clientX;
             _.translationRatio();
@@ -103,7 +110,7 @@ class Slider {
         function handleTouchEnd(ev) {
             var _a, _b;
             (_a = _.$slider) === null || _a === void 0 ? void 0 : _a.removeEventListener('touchmove', handleTouchMove);
-            _.handleTouchEnd();
+            _.handleTranslationEnd();
             (_b = _.$slider) === null || _b === void 0 ? void 0 : _b.removeEventListener('touchend', handleTouchEnd);
         }
         function handleTouchStart(ev) {
@@ -113,6 +120,7 @@ class Slider {
             (_b = _.$slider) === null || _b === void 0 ? void 0 : _b.addEventListener('touchend', handleTouchEnd);
         }
         (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.addEventListener('touchstart', handleTouchStart);
+        // MOUSE EVENTS
         function handleMouseMove(ev) {
             _.translationMoveClientX = ev.clientX;
             _.translationRatio();
@@ -121,7 +129,7 @@ class Slider {
             var _a;
             document.removeEventListener('mousemove', handleMouseMove);
             if (window.innerWidth < 1024) {
-                _.handleTouchEnd();
+                _.handleTranslationEnd();
             }
             else {
                 _.saveAndCheckOffSet();
