@@ -14,7 +14,7 @@ body {
 }
 
 .body-no-scroll {
-  overflow-y: hidden;
+  max-height: 100vh;
 }
 
 a {
