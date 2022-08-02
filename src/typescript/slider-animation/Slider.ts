@@ -6,11 +6,11 @@ class Slider {
 		document.querySelectorAll('.testimonials__slide');
 	private numberOfSlides = this.$slides?.length || 0;
 	private _currentSlide: number = 0;
-	private _prevSlide: number = 3;
+	private _prevSlide: number = this.numberOfSlides - 1;
 	private _nextSlide: number = 1;
 
-	private touchStartClientX = 0;
-	private touchMoveClientX = 0;
+	private translationStartClientX = 0;
+	private translationMoveClientX = 0;
 	private sliderOffset = 0;
 	private translationOffset = 0;
 
@@ -43,7 +43,8 @@ class Slider {
 	}
 
 	computeTranslation() {
-		const translation = (this.touchMoveClientX / this.touchStartClientX) * 100 - 100;
+		const translation =
+			(this.translationMoveClientX / this.translationStartClientX) * 100 - 100;
 		const rounded = Math.round((translation + Number.EPSILON) * 100) / 100;
 		this.translationOffset = rounded;
 		this.applyTranslation(rounded + this.sliderOffset);
@@ -69,24 +70,24 @@ class Slider {
 		const rest = Math.abs(this.sliderOffset % 100);
 
 		// de gauche à droite mais translation < 30% ==> on revient à l'image actuelle
-		if (this.touchStartClientX > this.touchMoveClientX && rest <= 30) {
+		if (this.translationStartClientX > this.translationMoveClientX && rest <= 30) {
 			this.alignSlider(this.sliderOffset + rest);
 		}
 
 		// de gauche à droite mais translation > 30% ==> on passe à l'image suivante
-		else if (this.touchStartClientX > this.touchMoveClientX && rest > 30) {
+		else if (this.translationStartClientX > this.translationMoveClientX && rest > 30) {
 			this.alignSlider(this.sliderOffset - (100 - rest));
 			this.goNextSlide();
 		}
 
 		// de droite à gauche mais translation > 30% ==> on passe à l'image précédente
-		else if (this.touchStartClientX < this.touchMoveClientX && rest < 70) {
+		else if (this.translationStartClientX < this.translationMoveClientX && rest < 70) {
 			this.alignSlider(this.sliderOffset + rest);
 			this.goPrevSlide();
 		}
 
 		// de droite à gauche mais translation < 30% ==> on revient à l'image actuelle
-		else if (this.touchStartClientX < this.touchMoveClientX && rest >= 70) {
+		else if (this.translationStartClientX < this.translationMoveClientX && rest >= 70) {
 			this.alignSlider(this.sliderOffset - (100 - rest));
 		}
 	}
@@ -94,21 +95,37 @@ class Slider {
 	listen() {
 		const _ = this;
 
+		function handleTouchMove(this: HTMLElement, ev: TouchEvent) {
+			_.translationMoveClientX = ev.touches[0].clientX;
+			_.computeTranslation();
+		}
+		function handleTouchEnd(this: HTMLElement, ev: TouchEvent) {
+			_.$slider?.removeEventListener('touchmove', handleTouchMove as EventListener);
+			_.handleTouchEnd();
+			_.$slider?.removeEventListener('touchend', handleTouchEnd as EventListener);
+		}
 		function handleTouchStart(this: HTMLElement, ev: TouchEvent) {
-			_.touchStartClientX = ev.touches[0].clientX;
+			_.translationStartClientX = ev.touches[0].clientX;
+			_.$slider?.addEventListener('touchmove', handleTouchMove as EventListener);
+			_.$slider?.addEventListener('touchend', handleTouchEnd as EventListener);
 		}
 		this.$slider?.addEventListener('touchstart', handleTouchStart as EventListener);
 
-		function handleTouchMove(this: HTMLElement, ev: TouchEvent) {
-			_.touchMoveClientX = ev.touches[0].clientX;
+		function handleMouseMove(this: HTMLElement, ev: MouseEvent) {
+			_.translationMoveClientX = ev.clientX;
 			_.computeTranslation();
 		}
-		this.$slider?.addEventListener('touchmove', handleTouchMove as EventListener);
-
-		function handleTouchEnd(this: HTMLElement, ev: TouchEvent) {
+		function handleMouseUp(this: HTMLElement, ev: MouseEvent) {
+			_.$slider?.removeEventListener('mousemove', handleMouseMove as EventListener);
 			_.handleTouchEnd();
+			_.$slider?.removeEventListener('mouseup', handleMouseUp as EventListener);
 		}
-		this.$slider?.addEventListener('touchend', handleTouchEnd as EventListener);
+		function handleMouseDown(this: HTMLElement, ev: MouseEvent) {
+			_.translationStartClientX = ev.clientX;
+			_.$slider?.addEventListener('mousemove', handleMouseMove as EventListener);
+			_.$slider?.addEventListener('mouseup', handleMouseUp as EventListener);
+		}
+		this.$slider?.addEventListener('mousedown', handleMouseDown as EventListener);
 	}
 }
 
