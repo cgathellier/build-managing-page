@@ -34,9 +34,12 @@ class Slider {
         var _a;
         (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.setAttribute('style', `transform: translateX(${value}%)`);
     }
-    computeTranslation() {
-        const translation = (this.translationMoveClientX / this.translationStartClientX) * 100 - 100;
-        const rounded = Math.round((translation + Number.EPSILON) * 100) / 100;
+    translationRatio() {
+        // déterminer la distance de translation par rapport à la fenêtre
+        const viewport = window.visualViewport.width;
+        const distance = this.translationMoveClientX - this.translationStartClientX;
+        const ratio = (distance / viewport) * 100;
+        const rounded = Math.round((ratio + Number.EPSILON) * 100) / 100;
         this.translationOffset = rounded;
         this.applyTranslation(rounded + this.sliderOffset);
     }
@@ -95,7 +98,7 @@ class Slider {
         const _ = this;
         function handleTouchMove(ev) {
             _.translationMoveClientX = ev.touches[0].clientX;
-            _.computeTranslation();
+            _.translationRatio();
         }
         function handleTouchEnd(ev) {
             var _a, _b;
@@ -112,7 +115,7 @@ class Slider {
         (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.addEventListener('touchstart', handleTouchStart);
         function handleMouseMove(ev) {
             _.translationMoveClientX = ev.clientX;
-            _.computeTranslation();
+            _.translationRatio();
         }
         function handleMouseUp(ev) {
             var _a;
