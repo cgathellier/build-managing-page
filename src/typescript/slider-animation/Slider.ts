@@ -51,10 +51,10 @@ class Slider {
 	}
 
 	alignSlider(value: number) {
-		this.$slider?.classList.add('testimonials__slider--smoothTransition');
+		this.$slider?.classList.add('smoothTransition');
 		this.applyTranslation(value);
 		setTimeout(() => {
-			this.$slider?.classList.remove('testimonials__slider--smoothTransition');
+			this.$slider?.classList.remove('smoothTransition');
 		}, 300);
 		this.sliderOffset = value;
 	}
@@ -116,14 +116,16 @@ class Slider {
 			_.computeTranslation();
 		}
 		function handleMouseUp(this: HTMLElement, ev: MouseEvent) {
-			_.$slider?.removeEventListener('mousemove', handleMouseMove as EventListener);
+			document.removeEventListener('mousemove', handleMouseMove as EventListener);
 			_.handleTouchEnd();
-			_.$slider?.removeEventListener('mouseup', handleMouseUp as EventListener);
+			_.$slider?.classList.remove('grabbing');
+			document.removeEventListener('mouseup', handleMouseUp as EventListener);
 		}
 		function handleMouseDown(this: HTMLElement, ev: MouseEvent) {
+			_.$slider?.classList.add('grabbing');
 			_.translationStartClientX = ev.clientX;
-			_.$slider?.addEventListener('mousemove', handleMouseMove as EventListener);
-			_.$slider?.addEventListener('mouseup', handleMouseUp as EventListener);
+			document.addEventListener('mousemove', handleMouseMove as EventListener);
+			document.addEventListener('mouseup', handleMouseUp as EventListener);
 		}
 		this.$slider?.addEventListener('mousedown', handleMouseDown as EventListener);
 	}

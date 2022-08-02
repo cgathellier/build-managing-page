@@ -43,11 +43,11 @@ class Slider {
     }
     alignSlider(value) {
         var _a;
-        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.classList.add('testimonials__slider--smoothTransition');
+        (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.classList.add('smoothTransition');
         this.applyTranslation(value);
         setTimeout(() => {
             var _a;
-            (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.classList.remove('testimonials__slider--smoothTransition');
+            (_a = this.$slider) === null || _a === void 0 ? void 0 : _a.classList.remove('smoothTransition');
         }, 300);
         this.sliderOffset = value;
     }
@@ -104,16 +104,18 @@ class Slider {
             _.computeTranslation();
         }
         function handleMouseUp(ev) {
-            var _a, _b;
-            (_a = _.$slider) === null || _a === void 0 ? void 0 : _a.removeEventListener('mousemove', handleMouseMove);
+            var _a;
+            document.removeEventListener('mousemove', handleMouseMove);
             _.handleTouchEnd();
-            (_b = _.$slider) === null || _b === void 0 ? void 0 : _b.removeEventListener('mouseup', handleMouseUp);
+            (_a = _.$slider) === null || _a === void 0 ? void 0 : _a.classList.remove('grabbing');
+            document.removeEventListener('mouseup', handleMouseUp);
         }
         function handleMouseDown(ev) {
-            var _a, _b;
+            var _a;
+            (_a = _.$slider) === null || _a === void 0 ? void 0 : _a.classList.add('grabbing');
             _.translationStartClientX = ev.clientX;
-            (_a = _.$slider) === null || _a === void 0 ? void 0 : _a.addEventListener('mousemove', handleMouseMove);
-            (_b = _.$slider) === null || _b === void 0 ? void 0 : _b.addEventListener('mouseup', handleMouseUp);
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
         }
         (_b = this.$slider) === null || _b === void 0 ? void 0 : _b.addEventListener('mousedown', handleMouseDown);
     }

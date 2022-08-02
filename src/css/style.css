@@ -6,7 +6,7 @@
 
 html,
 body {
-  width: 100vw;
+  width: 100%;
   margin: 0;
   font-size: 16px;
   overflow-x: hidden;
@@ -352,7 +352,7 @@ a:visited {
 }
 .testimonials__carousel {
   display: block;
-  width: 100vw;
+  width: 100%;
   height: 350px;
   user-select: none;
   position: relative;
@@ -360,7 +360,6 @@ a:visited {
 .testimonials__viewport {
   height: 100%;
   touch-action: pan-y;
-  cursor: grab;
   overflow: hidden;
   position: relative;
 }
@@ -369,14 +368,18 @@ a:visited {
   left: 0;
   width: 100%;
   margin-top: 70px;
+  cursor: grab;
 }
-.testimonials__slider--smoothTransition {
+.testimonials__slider.smoothTransition {
   transition: transform ease-in-out 300ms;
+}
+.testimonials__slider.grabbing {
+  cursor: grabbing;
 }
 .testimonials__slide {
   position: absolute;
   pointer-events: all;
-  width: 100vw;
+  width: 100%;
   height: 250px;
   padding: 0 1em;
 }
@@ -393,6 +396,7 @@ a:visited {
   left: 300%;
 }
 .testimonials__slide-content {
+  height: 100%;
   padding: 3em 0 1.5em 0;
   background-color: hsl(0deg, 0%, 98%);
   position: relative;
@@ -437,6 +441,37 @@ a:visited {
   background-color: hsl(12deg, 88%, 59%);
 }
 
+@media screen and (min-width: 768px) {
+  .testimonials__slide-content {
+    padding-right: 100px;
+    padding-left: 100px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .testimonials__slide {
+    width: 40%;
+    padding: 0 0.5em;
+  }
+  .testimonials__slide-0 {
+    left: 0%;
+  }
+  .testimonials__slide-1 {
+    left: 40%;
+  }
+  .testimonials__slide-2 {
+    left: 80%;
+  }
+  .testimonials__slide-3 {
+    left: 120%;
+  }
+  .testimonials__slide-content {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .testimonials__navigation {
+    display: none;
+  }
+}
 .conclusion {
   padding: 65px 40px 85px;
   background-color: hsl(12deg, 88%, 59%);
