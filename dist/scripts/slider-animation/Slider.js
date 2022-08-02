@@ -1,10 +1,9 @@
 import Dots from './Dots.js';
 class Slider {
     constructor() {
-        var _a;
         this.$slider = document.querySelector('.testimonials__slider');
         this.$slides = document.querySelectorAll('.testimonials__slide');
-        this.numberOfSlides = ((_a = this.$slides) === null || _a === void 0 ? void 0 : _a.length) || 0;
+        this.numberOfSlides = this.$slides.length || 0;
         this._currentSlide = 0;
         this._prevSlide = this.numberOfSlides - 1;
         this._nextSlide = 1;
@@ -51,14 +50,26 @@ class Slider {
         }, 300);
         this.sliderOffset = value;
     }
-    handleTouchEnd() {
+    slideRatio() {
+        // déterminer la taille d'une slide par rapport à la fenêtre
+        const viewport = window.visualViewport.width;
+        const slideWidth = Math.round(Number(window.getComputedStyle(this.$slides[0]).width.split('px')[0]) * 10) /
+            10;
+        return (slideWidth / viewport) * 100;
+    }
+    saveAndCheckOffSet() {
         this.sliderOffset += this.translationOffset;
+        const ratio = this.slideRatio();
+        const limit = ratio * -this.numberOfSlides + 100;
         if (this.sliderOffset > 0) {
             this.alignSlider(0);
         }
-        else if (this.sliderOffset < -300) {
-            this.alignSlider(-300);
+        else if (this.sliderOffset < limit) {
+            this.alignSlider(limit);
         }
+    }
+    handleTouchEnd() {
+        this.saveAndCheckOffSet();
         const rest = Math.abs(this.sliderOffset % 100);
         // de gauche à droite mais translation < 30% ==> on revient à l'image actuelle
         if (this.translationStartClientX > this.translationMoveClientX && rest <= 30) {
@@ -106,7 +117,12 @@ class Slider {
         function handleMouseUp(ev) {
             var _a;
             document.removeEventListener('mousemove', handleMouseMove);
-            _.handleTouchEnd();
+            if (window.innerWidth < 1024) {
+                _.handleTouchEnd();
+            }
+            else {
+                _.saveAndCheckOffSet();
+            }
             (_a = _.$slider) === null || _a === void 0 ? void 0 : _a.classList.remove('grabbing');
             document.removeEventListener('mouseup', handleMouseUp);
         }

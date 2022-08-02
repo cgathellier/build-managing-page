@@ -2,9 +2,8 @@ import Dots from './Dots.js';
 
 class Slider {
 	private $slider = document.querySelector('.testimonials__slider');
-	private $slides: NodeListOf<HTMLElement> | null =
-		document.querySelectorAll('.testimonials__slide');
-	private numberOfSlides = this.$slides?.length || 0;
+	private $slides: NodeListOf<HTMLElement> = document.querySelectorAll('.testimonials__slide')!;
+	private numberOfSlides = this.$slides.length || 0;
 	private _currentSlide: number = 0;
 	private _prevSlide: number = this.numberOfSlides - 1;
 	private _nextSlide: number = 1;
@@ -59,13 +58,31 @@ class Slider {
 		this.sliderOffset = value;
 	}
 
-	handleTouchEnd() {
+	slideRatio(): number {
+		// déterminer la taille d'une slide par rapport à la fenêtre
+		const viewport = window.visualViewport.width;
+		const slideWidth =
+			Math.round(Number(window.getComputedStyle(this.$slides[0]).width.split('px')[0]) * 10) /
+			10;
+
+		return (slideWidth / viewport) * 100;
+	}
+
+	saveAndCheckOffSet() {
 		this.sliderOffset += this.translationOffset;
+
+		const ratio = this.slideRatio();
+		const limit = ratio * -this.numberOfSlides + 100;
+
 		if (this.sliderOffset > 0) {
 			this.alignSlider(0);
-		} else if (this.sliderOffset < -300) {
-			this.alignSlider(-300);
+		} else if (this.sliderOffset < limit) {
+			this.alignSlider(limit);
 		}
+	}
+
+	handleTouchEnd() {
+		this.saveAndCheckOffSet();
 
 		const rest = Math.abs(this.sliderOffset % 100);
 
@@ -117,7 +134,11 @@ class Slider {
 		}
 		function handleMouseUp(this: HTMLElement, ev: MouseEvent) {
 			document.removeEventListener('mousemove', handleMouseMove as EventListener);
-			_.handleTouchEnd();
+			if (window.innerWidth < 1024) {
+				_.handleTouchEnd();
+			} else {
+				_.saveAndCheckOffSet();
+			}
 			_.$slider?.classList.remove('grabbing');
 			document.removeEventListener('mouseup', handleMouseUp as EventListener);
 		}
