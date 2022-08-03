@@ -1,17 +1,13 @@
-import ObserversManager from '../ObserversManager.js';
+import ObserversManager, { Observer } from '../ObserversManager.js';
 import MenuObserver from './Menu.js';
 import BackdropObserver from './Backdrop.js';
 
-type Action = 'OPEN' | 'CLOSE';
-
-interface Observer {
-	toggle(action: Action): void;
-}
+export type Action = 'OPEN' | 'CLOSE';
 
 class Button {
 	private $button: HTMLButtonElement | null = document.querySelector('.header__menu-button');
 	private $body: HTMLBodyElement = document.querySelector('body')!;
-	private AnimationManager = new ObserversManager<Observer, Action>();
+	private AnimationManager = new ObserversManager<Observer<Action>, Action>();
 	private MenuObs = new MenuObserver();
 	private BackdropObs = new BackdropObserver();
 
@@ -56,5 +52,3 @@ class Button {
 }
 
 const button = new Button();
-
-export { Action, Observer };

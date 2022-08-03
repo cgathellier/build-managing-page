@@ -1,6 +1,7 @@
-import { Action, Observer } from './Button';
+import { Observer } from '../ObserversManager';
+import { Action } from './Button';
 
-export default class Backdrop implements Observer {
+export default class Backdrop implements Observer<Action> {
 	public $backdrop = document.querySelector('.header__menu-backdrop');
 
 	toggle(action: Action): void {

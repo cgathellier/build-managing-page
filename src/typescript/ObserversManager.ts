@@ -1,4 +1,4 @@
-interface Observer<S> {
+export interface Observer<S> {
 	toggle(action: S): void;
 }
 

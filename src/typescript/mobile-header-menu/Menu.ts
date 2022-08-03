@@ -1,6 +1,7 @@
-import { Action, Observer } from './Button';
+import { Observer } from '../ObserversManager';
+import { Action } from './Button';
 
-export default class Menu implements Observer {
+export default class Menu implements Observer<Action> {
 	private $menu = document.querySelector('.header__menu');
 
 	toggle(action: Action): void {
