@@ -1,33 +1,23 @@
-class IntersectionsManager {
-	private $presentationHeader: HTMLDivElement = document.querySelector('.presentation__header')!;
+const $boxes: NodeListOf<HTMLElement> = document.querySelectorAll('[data-intersect]')!;
 
-	constructor() {
-		this.listen();
-	}
-
-	listen() {
-		function handleIntersect(
-			entries: IntersectionObserverEntry[],
-			observer: IntersectionObserver
-		) {
-			entries.forEach(entry => {
-				// retirer les class qui font disparaître les éléments
-				// soit à gauche soit à droite
-
-				console.log(entry.isIntersecting);
-			});
+function handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
+	entries.forEach(entry => {
+		if (entry.intersectionRatio === 1) {
+			entry.target.children[0]?.classList.add('is-in-viewport');
 		}
-
-		const options: IntersectionObserverInit = {
-			root: null,
-			rootMargin: '0px',
-			threshold: 1.0,
-		};
-
-		const observer = new IntersectionObserver(handleIntersect, options);
-
-		observer.observe(this.$presentationHeader);
-	}
+	});
 }
 
-new IntersectionsManager();
+const options: IntersectionObserverInit = {
+	root: null,
+	rootMargin: '0px',
+	threshold: 1.0,
+};
+
+const observer = new IntersectionObserver(handleIntersect, options);
+
+$boxes.forEach((box, index) => {
+	setTimeout(() => {
+		observer.observe(box);
+	}, 500 * index);
+});

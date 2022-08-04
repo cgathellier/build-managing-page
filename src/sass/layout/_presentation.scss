@@ -5,16 +5,23 @@
 	margin-top: 100px;
 
 	&__header {
-		margin-bottom: 50px;
-		padding: 0 2em;
+		height: min-content;
 
-		& h2 {
-			@include mixins.sectionTitle;
-		}
+		&-content {
+			margin-bottom: 50px;
+			padding: 0 2em;
+			transform: translateX(-100%);
+			opacity: 0;
+			transition: all ease-in-out 700ms;
 
-		& p {
-			@include mixins.text;
-			text-align: center;
+			& h2 {
+				@include mixins.sectionTitle;
+			}
+
+			& p {
+				@include mixins.text;
+				text-align: center;
+			}
 		}
 	}
 
@@ -24,6 +31,12 @@
 
 	&__article {
 		margin-bottom: 50px;
+
+		&-content {
+			transform: translateX(100%);
+			opacity: 0;
+			transition: all ease-in-out 700ms;
+		}
 
 		& h3 {
 			height: 2.4em;
@@ -55,6 +68,11 @@
 	}
 }
 
+.is-in-viewport {
+	transform: translateX(0%);
+	opacity: 1;
+}
+
 @media screen and (min-width: 768px) {
 	.presentation {
 		padding: 0 100px;
@@ -68,8 +86,9 @@
 		flex-direction: row;
 
 		&__header {
-			width: 50%;
 			padding: 0 50px 0 0;
+			margin-bottom: 0;
+			width: 50%;
 
 			& h2 {
 				text-align: start;
