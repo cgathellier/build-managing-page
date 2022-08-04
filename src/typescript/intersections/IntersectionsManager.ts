@@ -2,7 +2,7 @@ const $boxes: NodeListOf<HTMLElement> = document.querySelectorAll('[data-interse
 
 function handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
 	entries.forEach(entry => {
-		if (entry.intersectionRatio === 1) {
+		if (entry.intersectionRatio === 1 || entry.target.getBoundingClientRect().y < 0) {
 			entry.target.children[0]?.classList.add('is-in-viewport');
 		}
 	});
