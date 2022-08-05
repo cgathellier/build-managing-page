@@ -21,7 +21,10 @@
 		&-input {
 			@include mixins.roundedEl;
 			margin-right: 0.7em;
-			color: variables.$primary-color;
+
+			&.error {
+				color: variables.$primary-color;
+			}
 		}
 
 		&-message {

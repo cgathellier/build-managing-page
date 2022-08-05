@@ -546,6 +546,8 @@ a:visited {
   border-radius: 1.7em;
   font-size: 0.8em;
   margin-right: 0.7em;
+}
+.footer__newsletter-input.error {
   color: hsl(12deg, 88%, 59%);
 }
 .footer__newsletter-message {

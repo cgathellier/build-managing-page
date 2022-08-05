@@ -3,7 +3,7 @@ import Input from './Input.js';
 import ErrorMessage from './ErrorMessage.js';
 import API, { ResponseObj } from './API.js';
 
-export type Action = 'SUCCESS' | 'ERROR';
+export type Action = 'SUCCESS' | 'ERROR' | 'RESET';
 
 class SubmitButton {
 	private $button: HTMLButtonElement = document.querySelector(
@@ -16,6 +16,7 @@ class SubmitButton {
 	constructor() {
 		this.ValidationManager.subscribe(this.InputEl);
 		this.ValidationManager.subscribe(this.ErrorEl);
+		this.isTyping = this.isTyping.bind(this);
 
 		this.listen();
 	}
@@ -29,7 +30,13 @@ class SubmitButton {
 		this.ValidationManager.fire('ERROR');
 	}
 
+	isTyping() {
+		this.ValidationManager.fire('RESET');
+	}
+
 	listen() {
+		this.InputEl.listen(this.isTyping);
+
 		this.$button.addEventListener('click', e => {
 			e.preventDefault();
 			const isValid = this.InputEl.checkEmail();

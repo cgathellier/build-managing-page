@@ -17,8 +17,21 @@ export default class Input {
         }
     }
     toggle(action) {
-        if (action === 'SUCCESS') {
-            this.$input.value = '';
+        switch (action) {
+            case 'SUCCESS':
+                this.$input.value = '';
+                break;
+            case 'ERROR':
+                this.$input.classList.add('error');
+                break;
+            case 'RESET':
+                this.$input.classList.remove('error');
+                break;
+            default:
+                break;
         }
+    }
+    listen(isTyping) {
+        this.$input.addEventListener('input', isTyping);
     }
 }
