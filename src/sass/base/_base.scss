@@ -14,6 +14,22 @@ body {
 	position: relative;
 }
 
+body {
+	isolation: isolate;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 0 0;
+		z-index: -1;
+		background-image: url('../../../images/bg-tablet-pattern-colored.svg'),
+			url('../../../images/bg-tablet-pattern-colored.svg');
+		background-repeat: no-repeat;
+		background-position: right -1em top -8em, right -7em top 35em;
+		background-size: 30em, 20em;
+	}
+}
+
 .body-no-scroll {
 	max-height: 100vh;
 }
@@ -24,5 +40,19 @@ a {
 
 	&:visited {
 		color: inherit;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	body::before {
+		background-position: right -5em top -3em, left -15em top 60em;
+		background-size: 35em;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	body::before {
+		background-position: right -5em top -8em, left -25em top 60em;
+		background-size: 45em;
 	}
 }
