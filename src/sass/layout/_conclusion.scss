@@ -33,7 +33,7 @@
 	.conclusion::before {
 		background-image: url('../../../images/bg-tablet-pattern.svg'),
 			url('../../../images/bg-tablet-pattern.svg');
-		background-position: -10em 5em, 30em -20em;
+		background-position: left -10em top 5em, right -10em top -18em;
 		background-size: 30em;
 	}
 }
@@ -48,7 +48,7 @@
 		justify-content: space-between;
 
 		&::before {
-			background-position: -5em 3em, 40em -18em;
+			background-position: left -5em top 3em, right -10em top -18em;
 		}
 
 		& h2 {
@@ -63,7 +63,7 @@
 		@include mixins.desktopSectionPadding;
 
 		&::before {
-			background-position: 0em 3em, 60em -18em;
+			background-position: left 5em top 3em, right 5em bottom 3em;
 		}
 	}
 }
