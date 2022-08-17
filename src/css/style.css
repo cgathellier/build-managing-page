@@ -496,12 +496,32 @@ a:visited {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  isolation: isolate;
+}
+.conclusion::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 0;
+  z-index: -1;
+  background-image: url("../../../images/bg-tablet-pattern.svg");
+  background-repeat: no-repeat;
+  background-position: -18em 2em;
+  background-size: 40em;
+  opacity: 0.07;
 }
 .conclusion h2 {
   font-size: 2.3em;
   text-align: center;
 }
 
+@media screen and (min-width: 768px) {
+  .conclusion::before {
+    background-image: url("../../../images/bg-tablet-pattern.svg"), url("../../../images/bg-tablet-pattern.svg");
+    background-position: -10em 5em, 30em -20em;
+    background-size: 30em;
+  }
+}
 @media screen and (min-width: 1024px) {
   .conclusion {
     padding-left: 100px;
@@ -512,6 +532,9 @@ a:visited {
     flex-direction: row;
     justify-content: space-between;
   }
+  .conclusion::before {
+    background-position: -5em 3em, 40em -18em;
+  }
   .conclusion h2 {
     max-width: 450px;
     text-align: start;
@@ -521,6 +544,9 @@ a:visited {
   .conclusion {
     padding-left: 200px;
     padding-right: 200px;
+  }
+  .conclusion::before {
+    background-position: 0em 3em, 60em -18em;
   }
 }
 .footer {
