@@ -1,6 +1,8 @@
 import ObserversManager, { Observer } from '../ObserversManager.js';
 import MenuObserver from './Menu.js';
 import BackdropObserver from './Backdrop.js';
+import IconHamburger from '../../../images/icon-hamburger.svg';
+import IconClose from '../../../images/icon-close.svg';
 
 export type Action = 'OPEN' | 'CLOSE';
 
@@ -33,11 +35,11 @@ class Button {
 
 		if (this.isMenuOpen()) {
 			this.AnimationManager.fire('CLOSE');
-			this.$button.innerHTML = `<img src="./images/icon-hamburger.svg" alt="Open menu" />`;
+			this.$button.innerHTML = `<img src="${IconHamburger}" alt="Open menu" />`;
 			this.$body.classList.remove('body-no-scroll');
 		} else {
 			this.AnimationManager.fire('OPEN');
-			this.$button.innerHTML = `<img src="./images/icon-close.svg" alt="Close menu" />`;
+			this.$button.innerHTML = `<img src="${IconClose}" alt="Close menu" />`;
 			this.$body.classList.add('body-no-scroll');
 		}
 	}

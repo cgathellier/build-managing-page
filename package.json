@@ -4,9 +4,6 @@
 	"description": "![Design preview for the Manage landing page coding challenge](./design/desktop-preview.jpg)",
 	"main": "index.js",
 	"scripts": {
-		"sass": "sass --watch ./src/sass/main.scss:./src/css/style.css --style expanded",
-		"prefix": "postcss ./src/css/style.css --use autoprefixer -d ./dist/prefixed/",
-		"start": "lite-server",
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview"
@@ -19,7 +16,6 @@
 		"typescript": "^4.7.4"
 	},
 	"dependencies": {
-		"lite-server": "^2.6.1",
 		"netlify-cli": "^11.3.0",
 		"vite": "^3.0.9"
 	}
