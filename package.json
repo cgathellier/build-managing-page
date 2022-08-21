@@ -15,10 +15,12 @@
 	"license": "ISC",
 	"browserslist": "last 4 versions",
 	"devDependencies": {
+		"sass": "^1.54.5",
 		"typescript": "^4.7.4"
 	},
 	"dependencies": {
 		"lite-server": "^2.6.1",
+		"netlify-cli": "^11.3.0",
 		"vite": "^3.0.9"
 	}
 }

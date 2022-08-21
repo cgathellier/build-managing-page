@@ -4,6 +4,6 @@
 
 https://www.frontendmentor.io/challenges/manage-landing-page-SLXqC6P5
 
-## Lien GitHub Pages
+## Lien Hébergement Netlify
 
-https://cgathellier.github.io/manage-landing-page/
+https://cgathellier-managing-landing-page.netlify.app/

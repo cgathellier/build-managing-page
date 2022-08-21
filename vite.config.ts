@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	base: '/test-vite/',
+	assetsInclude: ['images/*.svg'],
 	publicDir: 'public',
 });

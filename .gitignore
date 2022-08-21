@@ -17,3 +17,5 @@
 node_modules/
 
 images/
+# Local Netlify folder
+.netlify
